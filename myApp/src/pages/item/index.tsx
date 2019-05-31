@@ -1,6 +1,6 @@
 import { connect } from 'dva';
 import React, { Component } from 'react';
-
+import { Row, Col } from 'antd';
 import { ItemModelState, ConnectProps } from '@/models/connect';
 
 import styles from './index.less';
@@ -17,12 +17,18 @@ class Page extends Component<PageProps, PageState> {
 
   render() {
     const {
-      item: { name, items },
+      item: { items = [] },
     } = this.props;
     return (
-      <div className={styles.userCenter}>
-        Hello {name}
-        <h2>This is {JSON.stringify(items)}</h2>
+      <div className={styles.normal}>
+        <Row>
+          {items.reverse().map(data => (
+            <Col key={data.item_id} span={3} className={styles.heroitem}>
+              <img src={`https://game.gtimg.cn/images/yxzj/img201606/itemimg/${data.item_id}.jpg`} />
+              <p>{data.item_name}</p>
+            </Col>
+          ))}
+        </Row>
       </div>
     );
   }
