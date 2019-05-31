@@ -4,7 +4,7 @@ import { Reducer } from 'redux';
 import { Subscription } from 'dva';
 
 export interface HeroModelState {
-  name: string;
+  filterKey: number;
   heros: [];
 }
 
@@ -25,7 +25,7 @@ const HeroModel: HeroModelType = {
   namespace: 'hero',
 
   state: {
-    name: '',
+    filterKey: 0,
     heros: []
   },
 
