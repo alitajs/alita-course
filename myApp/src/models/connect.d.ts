@@ -4,7 +4,9 @@ import { IndexModelState } from './index';
 import { HeroModelState } from './hero';
 import { ItemModelState } from './item';
 import { SummonerModelState } from './summoner';
+import { HerodetailModelState } from './herodetail';
 export {
+	HerodetailModelState,
 	SummonerModelState,
 	ItemModelState,
 	HeroModelState,
@@ -65,6 +67,8 @@ export interface Loading {
 }
 
 export interface ConnectState {
+	herodetail?: HerodetailModelState;
+
 	summoner?: SummonerModelState;
 
 	item?: ItemModelState;

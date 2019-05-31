@@ -1,7 +1,7 @@
 import { connect } from 'dva';
 import React, { Component } from 'react';
 import { Row, Col, Radio, Card } from 'antd';
-
+import { router } from 'alita';
 import { HeroModelState, ConnectProps } from '@/models/connect';
 import FreeHeroItem from '@/components/FreeHeroItem';
 import styles from './index.less';
@@ -48,6 +48,9 @@ class Page extends Component<PageProps, PageState> {
         },
       });
     };
+    const gotoDetail = item => {
+      router.push(`/herodetail/${item.ename}`);
+    };
     return (
       <div className={styles.normal}>
         <div className={styles.info}>
@@ -84,7 +87,7 @@ class Page extends Component<PageProps, PageState> {
             .filter(item => filterKey === 0 || item.hero_type === filterKey)
             .reverse()
             .map(item => (
-              <Col key={item.ename} span={3} className={styles.heroitem}>
+              <Col key={item.ename} span={3} className={styles.heroitem} onClick={() => gotoDetail(item)}>
                 <img src={`https://game.gtimg.cn/images/yxzj/img201606/heroimg/${item.ename}/${item.ename}.jpg`} />
                 <p>{item.cname}</p>
               </Col>
