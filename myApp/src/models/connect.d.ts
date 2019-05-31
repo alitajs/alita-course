@@ -1,7 +1,13 @@
 import { RouterTypes, AnyAction, match, EffectsCommandMap } from 'alita';
 import { IndexModelState } from './index';
 
+import { HeroModelState } from './hero';
+import { ItemModelState } from './item';
+import { SummonerModelState } from './summoner';
 export {
+	SummonerModelState,
+	ItemModelState,
+	HeroModelState,
   IndexModelState
 };
 
@@ -59,6 +65,12 @@ export interface Loading {
 }
 
 export interface ConnectState {
+	summoner?: SummonerModelState;
+
+	item?: ItemModelState;
+
+	hero?: HeroModelState;
+
   index?: IndexModelState;
 }
 
