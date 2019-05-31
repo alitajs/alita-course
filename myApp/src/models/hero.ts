@@ -42,7 +42,13 @@ const HeroModel: HeroModelType = {
       });
     },
     *fetch({ type, payload }, { put, call, select }) {
-      const data = yield request('/api/herolist.json');
+      // const data = yield request('/api/herolist.json');
+      const data = yield request('/api/herodetails.json', {
+        method: 'POST',
+        body: JSON.stringify({
+          ename: 110,
+        }),
+      });
       const localData = [
         {
           ename: 105,
