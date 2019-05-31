@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Row, Col, Radio, Card } from 'antd';
 
 import { HeroModelState, ConnectProps } from '@/models/connect';
+import FreeHeroItem from '@/components/FreeHeroItem';
 import styles from './index.less';
 
 const RadioGroup = Radio.Group;
@@ -28,7 +29,7 @@ class Page extends Component<PageProps, PageState> {
 
   render() {
     const {
-      hero: { heros = [], filterKey = 0 },
+      hero: { heros = [], filterKey = 0, freeheros = [], itemHover = 0 },
       dispatch,
     } = this.props;
     const onChange = e => {
@@ -39,8 +40,36 @@ class Page extends Component<PageProps, PageState> {
         },
       });
     };
+    const onItemHover = e => {
+      dispatch({
+        type: 'hero/save',
+        payload: {
+          itemHover: e,
+        },
+      });
+    };
     return (
       <div className={styles.normal}>
+        <div className={styles.info}>
+          <Row className={styles.freehero}>
+            <Col span={24}>
+              <p>周免英雄</p>
+              <div>
+                {freeheros.map((data, index) => {
+                  return (
+                    <FreeHeroItem
+                      data={data}
+                      itemHover={itemHover}
+                      onItemHover={onItemHover}
+                      thisIndex={index}
+                      key={index}
+                    />
+                  );
+                })}
+              </div>
+            </Col>
+          </Row>
+        </div>
         <Card className={styles.radioPanel}>
           <RadioGroup onChange={onChange} value={filterKey}>
             {heroType.map(data => (

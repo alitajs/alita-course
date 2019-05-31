@@ -22,3 +22,9 @@ export async function querySummoner() {
 export async function queryMing() {
   return request('/api/ming.json');
 }
+export async function getFreeHeros(params) {
+  return request('/api/freeheros.json', {
+    method: 'POST',
+    body: JSON.stringify(params),
+  });
+}
