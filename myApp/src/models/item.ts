@@ -4,8 +4,8 @@ import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 import { Subscription } from 'dva';
 export interface ItemModelState {
-  name: string;
-  items:[];
+  filterKey: number;
+  items: [];
 }
 
 export interface ItemModelType {
@@ -15,7 +15,7 @@ export interface ItemModelType {
     query: Effect;
   };
   reducers: {
-    save:  Reducer<ItemModelState>;
+    save: Reducer<ItemModelState>;
   };
   subscriptions: { setup: Subscription };
 }
@@ -25,8 +25,8 @@ const ItemModel: ItemModelType = {
   namespace: 'item',
 
   state: {
-    name: '',
-    items:[]
+    filterKey: 0,
+    items: []
   },
 
   effects: {
