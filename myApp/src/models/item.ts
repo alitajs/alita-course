@@ -1,10 +1,11 @@
-import { query } from '@/services/api';
+import { queryItem } from '@/services/api';
 
 import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 import { Subscription } from 'dva';
 export interface ItemModelState {
   name: string;
+  items:[];
 }
 
 export interface ItemModelType {
@@ -24,18 +25,19 @@ const ItemModel: ItemModelType = {
   namespace: 'item',
 
   state: {
-    name: ''
+    name: '',
+    items:[]
   },
 
   effects: {
     *query({ payload }, { call, put, select }) {
-      const data = yield call(query, payload);
-      console.log(data)
+      const itemlist = yield call(queryItem);
       yield put({
         type: 'save',
-        payload: { name: data.text },
+        payload: {
+          items: itemlist,
+        },
       });
-
     },
 
   },

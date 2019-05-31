@@ -1,5 +1,5 @@
 export default {
-  appType: 'h5',
+  appType: 'pc',
   // proxy: {
   //   "/api": {
   //     "target": "https://pvp.qq.com/web201605/js/",

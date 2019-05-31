@@ -13,13 +13,18 @@ interface PageState {}
 
 @connect(({ item }) => ({ item }))
 class Page extends Component<PageProps, PageState> {
-  state: PageState  = {};
+  state: PageState = {};
 
   render() {
     const {
-      item: { name },
+      item: { name, items },
     } = this.props;
-    return <div className={styles.userCenter}>Hello {name}</div>;
+    return (
+      <div className={styles.userCenter}>
+        Hello {name}
+        <h2>This is {JSON.stringify(items)}</h2>
+      </div>
+    );
   }
 }
 

@@ -1,10 +1,11 @@
-import { query } from '@/services/api';
+import { querySummoner } from '@/services/api';
 
 import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 import { Subscription } from 'dva';
 export interface SummonerModelState {
   name: string;
+  summoners:[]
 }
 
 export interface SummonerModelType {
@@ -24,16 +25,18 @@ const SummonerModel: SummonerModelType = {
   namespace: 'summoner',
 
   state: {
-    name: ''
+    name: '',
+    summoners:[]
   },
 
   effects: {
     *query({ payload }, { call, put, select }) {
-      const data = yield call(query, payload);
-      console.log(data)
+      const summonerlist = yield call(querySummoner);
       yield put({
         type: 'save',
-        payload: { name: data.text },
+        payload: {
+          summoners: summonerlist,
+        },
       });
 
     },
