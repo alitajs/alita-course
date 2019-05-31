@@ -3,6 +3,8 @@ import { query } from '@/services/api';
 import { Effect } from '@/models/connect';
 import { Reducer } from 'redux';
 import { Subscription } from 'dva';
+import { request } from 'alita';
+
 export interface HeroModelState {
   name: string;
   heros: [];
@@ -13,6 +15,7 @@ export interface HeroModelType {
   state: HeroModelState;
   effects: {
     query: Effect;
+    fetch: Effect;
   };
   reducers: {
     save: Reducer<HeroModelState>;
@@ -39,7 +42,8 @@ const HeroModel: HeroModelType = {
       });
     },
     *fetch({ type, payload }, { put, call, select }) {
-      const data = [
+      const data = yield request('/api/herolist.json');
+      const localData = [
         {
           ename: 105,
           cname: '廉颇',
@@ -60,7 +64,7 @@ const HeroModel: HeroModelType = {
       yield put({
         type: 'save',
         payload: {
-          heros: data,
+          heros: data || localData,
         },
       });
     },
