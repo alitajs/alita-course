@@ -1,4 +1,5 @@
 import { queryItem } from 'services/api';
+import itemlistjson from '../../../../mock/item.json';
 
 export default {
   state: {
@@ -23,12 +24,12 @@ export default {
   },
   effects: {
     *fetch({ type, payload }, { put, call, select }) {
-      const item = yield call(queryItem);
+      // const item = yield call(queryItem);
 
       yield put({
         type: 'save',
         payload: {
-          items: item,
+          items: itemlistjson,
         },
       });
     },
